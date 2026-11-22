@@ -1,0 +1,26 @@
+Machine Learning Process
+
+i. Data Pre-processing
+    * Import the data
+    * Clean the data
+    * Split into training & test sets
+
+ii. Modelling
+    * Build the model
+    * Train the model
+    * Make predictions
+
+iii. Evaluation
+    * Calculate performance metrics
+    * Make a verdict
+
+
+
+Feature Scaling
+-> This is always applied to the columns.
+
+Normalization = X - Xmin/(Xmax - Xmin)
+here values always ranges between 0 and 1
+
+Standardization = X - meu/(standard deviation)
+here values always ranges between -3 to +3
