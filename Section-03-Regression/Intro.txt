@@ -1,0 +1,169 @@
+Regression
+-> Regression models(both linear and non-linear) are used for predicting a real value like
+salary for example. if your independent variable is time,then you are forecasting future values,
+otherwise your model is predicting present but unknown values. Regression technique vary from
+linear regression to SVR and random forests regression.
+-> In this part, you will understand and learn how to implement the following machine learning
+regression models.
+
+i. Simple Linear Regression
+ii. Multiple Linear Regression
+iii. Polynomial Regression
+iv. Support Vector for Regression(SVR)
+v. Decision Tree Regression
+vi. Random Forest Regression
+
+
+Simple Linear Regression
+y^ = b0 +b1X1
+where
+y^ = Dependent variable
+b0 = y-intercept
+b1 = slope coefficient
+X1 = Independent variable
+
+
+This is the most important concept in Linear Regression. Once you understand this, you will understand what actually happens inside regressor.fit() and regressor.predict().
+
+Let's understand it mathematically, using a real example.
+1. How does Machine Learning find the straight line?
+Suppose you provide this training dataset:
+Experience (X)	Salary (Y)
+1	30,000
+2	40,000
+3	50,000
+4	60,000
+5	70,000
+
+We want to find a straight line:
+\[
+y = mx+c
+\]
+
+But we don't know the values of m and c.
+
+Machine Learning needs to calculate them.
+
+The objective is to find the line that produces the smallest possible prediction errors across the training data.
+2. How does it calculate m (slope) and c (intercept)?
+Scikit-learn's LinearRegression uses a mathematical technique called Ordinary Least Squares.
+
+It calculates the following:
+
+Slope (m):
+\[
+m = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}
+{\sum (x_i-\bar{x})^2}
+\]
+
+Intercept (c):
+\[
+c = \bar{y}-m\bar{x}
+\]
+
+Where:
+- \(x_i\) = Individual experience value.
+- \(y_i\) = Individual salary value.
+- \(\bar{x}\) = Average experience.
+- \(\bar{y}\) = Average salary.
+Let's calculate them using our example.
+
+Average experience:
+\[
+\bar{x} = \frac{1+2+3+4+5}{5}=3
+\]
+
+Average salary:
+\[
+\bar{y} = \frac{30000+40000+50000+60000+70000}{5}
+=50000
+\]
+
+Substituting into the slope formula:
+\[
+m = \frac{100000}{10}=10000
+\]
+
+Now calculate the intercept:
+\[
+c = 50000-(10000\times3)
+\]
+
+\[
+c=20000
+\]
+
+Calculated result
+Our final equation is:
+\[
+\boxed{y=10000x+20000}
+\]
+
+This is the best-fit straight line for our training dataset.
+3. What if the training data isn't perfectly aligned?
+Consider a slightly different dataset:
+Experience	Actual Salary
+1	32,000
+2	39,000
+3	52,000
+4	58,000
+5	72,000
+
+Now the data points don't form a perfect straight line.
+
+Machine Learning calculates a line that minimizes the sum of squared differences between actual salaries and predicted salaries.
+
+For each data point:
+\[
+Error = Actual\ Salary-Predicted\ Salary
+\]
+
+And:
+\[
+SSE = \sum Error^2
+\]
+
+Why square the errors?
+- Negative errors become positive.
+- Larger errors receive greater penalties.
+- Errors cannot cancel each other out.
+This is called the Least Squares Method.
+4. How does it calculate test data?
+Now comes the interesting part!
+
+Suppose our model has already learned:
+\[
+y=10000x+20000
+\]
+
+We provide new test data:
+Experience (X_test)
+6
+7
+8
+
+The model simply substitutes these values into the learned equation.
+
+For X = 6:
+\[
+y=10000(6)+20000=80000
+\]
+
+For X = 7:
+\[
+y=10000(7)+20000=90000
+\]
+
+For X = 8:
+\[
+y=10000(8)+20000=100000
+\]
+
+Prediction results
+Experience	Predicted salary
+6 years	80,000
+7 years	90,000
+8 years	100,000
+--------------------------------------------------------------------------------------------
+
+Multiple Linear Regression
