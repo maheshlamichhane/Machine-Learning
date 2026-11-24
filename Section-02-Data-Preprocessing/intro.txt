@@ -21,6 +21,8 @@ Feature Scaling
 
 Normalization = X - Xmin/(Xmax - Xmin)
 here values always ranges between 0 and 1
+it will be use in case of normal distribution.
 
 Standardization = X - meu/(standard deviation)
 here values always ranges between -3 to +3
+it will be used in case of all type of distribution.
