@@ -231,6 +231,12 @@ Step 4: -> No new variable can enter and no old variable can exit.
 
 Note: Backward Elimination is the fastest approach
 
+---------------------------------------------------------------------------------------------------
+
+Polynomial Linear Regression
+y = b0 + b1x1 + b2x1^2 + b3x1^3 + ... + bnx1^n
+
+
 
 
 
