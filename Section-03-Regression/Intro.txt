@@ -167,3 +167,101 @@ Experience	Predicted salary
 --------------------------------------------------------------------------------------------
 
 Multiple Linear Regression
+y^ = b0 + b1X1 + b2X2 + ... + bnXn
+y^ = Dependent variable
+b0 = y-intercept(constant)
+b1 = Slope coefficient1
+X1 = independent variable1
+b2 = Slope coefficient2
+X2 = independent variable2
+bn = Slope coefficientn
+Xn = independent variablen
+
+
+Assumptions of Linear Regression
+i. Linearity(Linear relationship between Y and each X
+ii. Homoscedasticity(Equal variance)
+iii. Multivariate Normality(Normality of error distribution)
+iv. Independence(of observations includes no autocorrelation)
+v. Lack of multicollinearity(Predictors are not corrected with each other)
+vi. The outlier check(This is not an assumption,but an "extra")
+
+
+Statistical Significance:
+
+Building a Model
+i. All-in
+ii. Backward Elimination
+iii. Forward Selection
+iv. Bidirectional Elimination
+v. Score Comparison
+
+here 2,3,4 are called stepwise regression
+
+
+i. All-in
+-> Prior knowledge
+-> You have to
+-> Preparing for backward elimination
+
+
+ii. Backward Elimination
+Step 1: -> Select a significance level to stay in the model(e.g SL = 0.05)
+Step 2: -> Fit the full model with all possible predictors.
+Step 3: -> Consider the predictor with the highest P-value. if P > SL, go to step 4, otherwise got to FIN
+step 4: -> Remove the predictor
+step 5: -> Fit model without this variable.
+step 6: -> got to step 3 until condition satisfies
+
+FIN: Keep the previous model
+
+iii. Forward Selection
+Step 1: -> Select a significance level to enter the model(e.g SL = 0.05)
+Step 2: -> Fit all simple regression models y ~ xn Select the one with the lowest P-value.
+Step 3: -> Keep this variable and fit all possible models with one extra predictor added to the
+one(s) you already have.
+Step 4: -> Consider the predictor with the lowest P-value. If P < SL, goto step 3, otherwise goto FIN
+
+iv. Bidirectional Elimination
+Step 1: -> Select a significance level to enter and to stay in the model
+e.g SLENTER = 0.05, SLSTAY = 0.05
+Step 2: -> Perform the next step of Forward Selection(new variable must have P < SLENTER to enter)
+Step 3: -> Perform All steps of Backward Elimination(old variable must have P < SLSTAY to stay)
+Step 4: -> No new variable can enter and no old variable can exit.
+
+Note: Backward Elimination is the fastest approach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
