@@ -1,0 +1,103 @@
+Classification
+-> Unlike regression where you predict a continuous number, you use classification to predict a category. There is
+a wide variety of classification applications from medicine to marketing. Classification models include linear
+models like Logistic Regression, SVM, and Random Forests.
+-> In this part, you will understand and learn how to implement the following machine learning classification models.
+-> example how many employee leave or stay,classifying gmail like important or not important,image recognition.
+
+
+i. Logistic Regression
+ii. K-Nearest Neighbors(K-NN)
+iii. Support Vector Machine(SVM)
+iv. Kernel SVM
+v. Naive Bayes
+vi. Decision Tree Classification
+vii. Random Forest Classification
+
+
+Logistic Regression
+-> predict a categorical dependent variable from a number of independent variables.
+-> Example will purchase health insurance yes/no. age,income,family/single,level of edu is independent variable.
+
+Logistic Regression is a Supervised Machine Learning algorithm used for Classification problems.
+
+Although its name contains the word Regression, it is primarily used to predict categories or classes rather than
+continuous numerical values.
+
+Let's understand it step by step with simple examples.
+1. What is Logistic Regression?
+Suppose you want to build a machine learning model that predicts whether a student will pass or fail an examination based on the number of hours they study.
+
+Your training dataset looks like this:
+Study hours	Result
+1	Fail (0)
+2	Fail (0)
+3	Fail (0)
+4	Pass (1)
+5	Pass (1)
+6	Pass (1)
+7	Pass (1)
+
+You want your machine learning model to predict whether a new student who studies for 3.5 hours will pass or fail.
+
+This is a classification problem because the output belongs to one of two categories:
+- 0 = Fail
+- 1 = Pass
+Logistic Regression learns the relationship between study hours and the probability of passing.
+
+For example:
+- 1 hour → 10% probability of passing.
+- 3 hours → 30% probability of passing.
+- 5 hours → 80% probability of passing.
+- 7 hours → 95% probability of passing.
+The model then converts that probability into a class prediction.
+2. Why can't we use Linear Regression?
+This is one of the most important concepts to understand.
+
+Linear Regression predicts continuous numerical values.
+
+For example:
+\[
+y = b_0+b_1x
+\]
+
+If we use Linear Regression to predict whether a student passes or fails, the output could be:
+- 1.2
+- 0.8
+- -0.5
+- 1.5
+But our classification output should be either 0 or 1.
+
+Linear Regression can produce values outside the range of 0 and 1, which are not valid probabilities.
+
+Logistic Regression solves this problem by using the Sigmoid function.
+3. Understanding the Sigmoid Function
+The Sigmoid function is the most important part of Logistic Regression.
+
+It converts any numerical input into a value between 0 and 1.
+
+Its mathematical formula is:
+\[
+P(Y=1)=\frac{1}{1+e^{-z}}
+\]
+
+Where:
+\[
+z=b_0+b_1x_1+b_2x_2+\cdots+b_nx_n
+\]
+
+Here:
+- \(P(Y=1)\) = Probability that the output belongs to class 1.
+- \(e\) = Euler's mathematical constant (approximately 2.718).
+- \(b_0\) = Intercept.
+- \(b_1,b_2,\ldots\) = Model coefficients.
+- \(x_1,x_2,\ldots\) = Independent variables.
+The Sigmoid function produces an S-shaped curve.
+
+---------------------------------------------------------------------------------------------------------
+
+K-NN Regression Model
+
+
+
+
