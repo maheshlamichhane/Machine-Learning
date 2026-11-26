@@ -97,7 +97,242 @@ The Sigmoid function produces an S-shaped curve.
 ---------------------------------------------------------------------------------------------------------
 
 K-NN Regression Model
+K-Nearest Neighbors (KNN) Algorithm – Explained Simply
+K-Nearest Neighbors (KNN) is a Supervised Machine Learning algorithm used for both Classification and Regression problems.
 
+The main idea behind KNN is very simple:
+
+"Similar things are usually found near each other."
+
+KNN predicts the output of a new data point by looking at the closest existing data points (neighbors).
+
+Let's understand it with a real-world example.
+1. What is KNN?
+Suppose you have a dataset containing information about different fruits.
+Fruit	Weight (grams)	Sweetness
+Apple	150	4
+Apple	170	5
+Apple	160	4
+Orange	130	7
+Orange	140	8
+Orange	120	7
+
+Now, somebody gives you a new fruit:
+- Weight = 155 grams
+- Sweetness = 5
+You don't know whether it is an Apple or an Orange.
+
+KNN compares this new fruit with the existing fruits and finds the nearest neighbors.
+
+Suppose the nearest 3 fruits are:
+- Apple
+- Apple
+- Orange
+Since Apple appears most frequently, KNN predicts:
+Prediction: Apple
+This is called majority voting.
+2. How does KNN work?
+KNN follows these steps:
+Step 1: Load training dataset
+
+Collect existing data with known labels.
+
+
+Step 2: Choose K
+
+Decide how many nearest neighbors to consider.
+
+
+Step 3: Calculate distances
+
+Measure the distance between the new data point and existing data points.
+
+
+Step 4: Find K nearest neighbors
+
+Select the closest K data points.
+
+
+Step 5: Make prediction
+
+Classification: majority vote. Regression: average value.
+
+
+3. What does K mean in KNN?
+K represents the number of nearest neighbors used to make a prediction.
+
+For example:
+
+Suppose K = 3.
+
+The algorithm considers the 3 closest data points.
+Neighbor	Predicted category
+Neighbor 1	Apple
+Neighbor 2	Apple
+Neighbor 3	Orange
+
+Final prediction = Apple.
+
+Now suppose K = 5:
+Neighbor	Predicted category
+Neighbor 1	Apple
+Neighbor 2	Apple
+Neighbor 3	Orange
+Neighbor 4	Orange
+Neighbor 5	Apple
+
+Final prediction = Apple.
+
+The algorithm chooses the category with the most votes.
+
+Important: For binary classification, an odd K is often selected to reduce ties, although ties can still occur with multiple classes.
+4. How does KNN calculate distance?
+This is one of the most important parts of KNN.
+
+KNN needs to calculate the distance between data points to identify the nearest neighbors.
+
+There are several distance measurement methods.
+A. Euclidean Distance
+Euclidean distance is the most commonly used distance measurement in basic KNN.
+
+It calculates the straight-line distance between two points.
+
+Formula for two dimensions:
+\[
+d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
+\]
+
+For multiple dimensions:
+\[
+d=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
+\]
+
+Let's take an example.
+
+Point A = (2, 3)
+
+Point B = (5, 7)
+\[
+d=\sqrt{(5-2)^2+(7-3)^2}
+\]
+
+\[
+=\sqrt{9+16}
+\]
+
+\[
+=\sqrt{25}=5
+\]
+
+Therefore, the distance between A and B is 5.
+B. Manhattan Distance
+Manhattan distance calculates the distance by moving horizontally and vertically, like travelling through city streets.
+
+Formula:
+\[
+d=|x_2-x_1|+|y_2-y_1|
+\]
+
+Using the same points:
+
+A = (2, 3)
+
+B = (5, 7)
+\[
+d=|5-2|+|7-3|
+\]
+
+\[
+=3+4=7
+\]
+
+Euclidean distance = 5.
+
+Manhattan distance = 7.
+
+Other distance methods include Minkowski distance and Hamming distance. The appropriate method depends on the type of data.
+5. Types of KNN
+KNN can solve two types of problems.
+
+A. KNN Classification
+
+Used when the output is a category or class.
+
+Examples:
+- Spam / Not Spam
+- Pass / Fail
+- Apple / Orange
+- Fraud / Not Fraud
+It uses majority voting to determine the final class.
+
+B. KNN Regression
+
+Used when the output is a continuous numerical value.
+
+For example, predicting house prices.
+
+Suppose the nearest 3 houses have these prices:
+Neighbor	House price
+House 1	Rs. 50 lakh
+House 2	Rs. 60 lakh
+House 3	Rs. 70 lakh
+
+KNN Regression calculates the average:
+\[
+Prediction=\frac{50+60+70}{3}
+\]
+
+\[
+\boxed{Prediction=60\text{ lakh}}
+\]
+
+So, the predicted house price is Rs. 60 lakh.
+Difference between KNN Classification and Regression
+Classification	Regression
+Predicts categories	Predicts numbers
+Uses majority voting	Uses average
+Output: Apple	Output: Rs. 60 lakh
+
+
+6. Why is Feature Scaling important in KNN?
+This is a very important concept, especially when implementing KNN in Python.
+
+Suppose your dataset contains:
+Feature	Value
+Age	30
+Salary	100,000
+
+Here, Age ranges from approximately 18–60, while Salary can range from 20,000–200,000.
+
+KNN calculates distances using these features.
+
+Because Salary has much larger numerical values, it can dominate the distance calculation.
+
+As a result, Age might have very little influence on the prediction.
+
+Solution: Feature Scaling
+
+We normalize or standardize the features so they are on comparable scales.
+
+Two common techniques:
+
+A. Standardization
+\[
+z=\frac{x-\mu}{\sigma}
+\]
+
+Where:
+- \(x\) = Original value.
+- \(\mu\) = Mean.
+- \(\sigma\) = Standard deviation.
+B. Normalization (Min-Max Scaling)
+\[
+x'=\frac{x-x_{min}}{x_{max}-x_{min}}
+\]
+
+This generally transforms values into a range between 0 and 1.
+
+---------------------------------------------------------------------------------------------------------
 
 
 
