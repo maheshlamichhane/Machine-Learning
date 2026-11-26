@@ -240,10 +240,13 @@ y = b0 + b1x1 + b2x1^2 + b3x1^3 + ... + bnx1^n
 -----------------------------------------------------------------------------------------------------
 
 Support Vector Regression
+-> it can be used in both linear and non-linear dataset with different kernels.
 
 -------------------------------------------------------------------------------------------------
 
 Decision Tree Intuition
+-> It is not suitable for the single feature dataset
+-> it is suitable for non-linear dataset.
 
 
 
