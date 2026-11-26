@@ -26,7 +26,8 @@ continuous numerical values.
 
 Let's understand it step by step with simple examples.
 1. What is Logistic Regression?
-Suppose you want to build a machine learning model that predicts whether a student will pass or fail an examination based on the number of hours they study.
+Suppose you want to build a machine learning model that predicts whether a student will pass or fail an
+ examination based on the number of hours they study.
 
 Your training dataset looks like this:
 Study hours	Result
@@ -98,7 +99,8 @@ The Sigmoid function produces an S-shaped curve.
 
 K-NN Regression Model
 K-Nearest Neighbors (KNN) Algorithm – Explained Simply
-K-Nearest Neighbors (KNN) is a Supervised Machine Learning algorithm used for both Classification and Regression problems.
+K-Nearest Neighbors (KNN) is a Supervised Machine Learning algorithm used for both Classification and
+Regression problems.
 
 The main idea behind KNN is very simple:
 
@@ -332,7 +334,404 @@ x'=\frac{x-x_{min}}{x_{max}-x_{min}}
 
 This generally transforms values into a range between 0 and 1.
 
+
+
+
+
+
+
+
+
 ---------------------------------------------------------------------------------------------------------
+
+Support Vector Machine (SVM)
+Support Vector Machine (SVM) is a Supervised Machine Learning algorithm used for both Classification and
+ Regression problems.
+
+The main idea behind SVM is:
+
+Find the best possible boundary that separates different classes of data.
+
+Let's understand it with a simple example.
+1. What is SVM?
+Suppose you have information about two types of fruits:
+- Apples (Red points)
+- Oranges (Blue points)
+You want to build a machine learning model that can identify whether a newly introduced fruit is an Apple or an
+Orange.
+
+You have two features:
+- X-axis = Weight
+- Y-axis = Sweetness
+SVM looks at the existing data and tries to find a boundary (line) that separates the two categories.
+
+
+
+
+
+
+
+
+colab.research.google.com
+
+
+This separating boundary is called a Hyperplane.
+
+For a two-dimensional dataset, the hyperplane is a line.
+
+For a three-dimensional dataset, it is a plane.
+
+For higher-dimensional datasets, it is called a hyperplane.
+2. What makes SVM different from other algorithms?
+Let's compare it with Logistic Regression.
+
+Both algorithms can classify data into two categories, but they approach the problem differently.
+
+
+
+
+
+
+
+
+
+
+Logistic Regression
+
+Finds a linear decision boundary by optimizing likelihood (or minimizing log loss).
+
+
+
+
+
+
+
+
+
+
+
+SVM
+
+Finds a decision boundary that maximizes the margin between classes.
+
+
+The most important difference:
+- Logistic Regression focuses on estimating class probabilities.
+- SVM focuses on finding a boundary with the maximum margin.
+3. Understanding Hyperplane, Margin and Support Vectors
+These are the three most important concepts in SVM.
+A. Hyperplane
+A hyperplane is the decision boundary that separates different classes.
+
+For two-dimensional data, the equation of a line is:
+\[
+w_1x_1+w_2x_2+b=0
+\]
+
+Where:
+- \(w_1,w_2\) = Model weights.
+- \(x_1,x_2\) = Input features.
+- \(b\) = Bias.
+B. Margin
+Margin is the distance between the decision boundary and the nearest data points from each class.
+
+SVM tries to maximize this margin.
+
+Why?
+
+Because a larger margin generally helps the model generalize better to unseen data.
+
+
+
+
+
+
+
+
+mdpi.com
+
+
+C. Support Vectors
+Support vectors are the data points closest to the decision boundary.
+
+They are extremely important because they determine the position of the optimal separating hyperplane.
+
+For example:
+
+Suppose you have 100 data points.
+
+Only a few points closest to the boundary may determine the final SVM decision boundary.
+
+Those points are called Support Vectors.
+
+Remember:
+- Hyperplane = Separating boundary.
+- Margin = Distance between boundary and nearest points.
+- Support Vectors = Nearest data points that help determine the boundary.
+4. How does SVM work?
+SVM follows these general steps:
+Step 1: Load training dataset
+
+Input features and their class labels.
+
+
+Step 2: Identify possible separating boundaries
+
+Find boundaries that separate the classes.
+
+
+Step 3: Find support vectors
+
+Identify the closest points to the boundary.
+
+
+Step 4: Maximize the margin
+
+Choose the optimal separating hyperplane.
+
+
+Step 5: Predict new data
+
+Classify new observations using the learned boundary.
+
+
+5. What if data cannot be separated using a straight line?
+This is where SVM becomes interesting!
+
+Suppose your dataset contains two classes that are mixed together in a way that no straight line can separate them.
+
+A simple linear boundary will not work well.
+
+SVM handles this using something called the Kernel Trick.
+Understanding the Kernel Trick
+Imagine you have data arranged in a circular pattern:
+- Class A points are in the center.
+- Class B points surround Class A.
+
+
+
+
+
+
+
+
+medium.com
+
+
+You cannot separate these two classes properly using a straight line in the original two-dimensional space.
+
+But SVM can use a kernel function to represent the data in a higher-dimensional feature space, where a linear separating boundary may become possible.
+
+This is called the Kernel Trick.
+
+In simple words:
+
+The Kernel Trick helps SVM solve non-linear classification problems by implicitly working in a higher-dimensional feature space.
+6. Types of Kernel Functions in SVM
+A kernel function helps SVM handle different types of data relationships.
+
+There are four commonly used kernels.
+A. Linear Kernel
+Used when data can be separated using a straight line or hyperplane.
+\[
+K(x,y)=x^Ty
+\]
+
+
+
+
+
+
+
+
+
+askfilo.com
+
+
+Example: Classifying emails into spam and not spam when the features are approximately linearly separable.
+B. Polynomial Kernel
+Used when the relationship between data points is more complex and can be represented using polynomial interactions.
+\[
+K(x,y)=(\gamma x^Ty+r)^d
+\]
+
+Where:
+- \(\gamma\) = Kernel coefficient.
+- \(r\) = Constant term.
+- \(d\) = Polynomial degree.
+
+
+
+
+
+
+
+
+medium.com
+
+
+C. RBF (Radial Basis Function) Kernel
+This is one of the most commonly used kernels in SVM.
+
+It can handle complex non-linear relationships.
+\[
+K(x,y)=e^{-\gamma ||x-y||^2}
+\]
+
+
+
+
+
+
+
+
+
+mathworks.com
+
+
+The RBF kernel measures similarity between data points.
+- Nearby points have higher similarity.
+- Faraway points have lower similarity.
+D. Sigmoid Kernel
+The sigmoid kernel uses a hyperbolic tangent function.
+\[
+K(x,y)=\tanh(\gamma x^Ty+r)
+\]
+
+It resembles the activation function used in neural networks.
+
+It is less commonly used than the RBF kernel.
+Quick comparison
+Kernel	Best suited for
+Linear	Approximately linearly separable data
+Polynomial	Polynomial relationships
+RBF	Complex non-linear relationships
+Sigmoid	Certain neural-network-like representations
+
+7. Important SVM Hyperparameters
+When implementing SVM, you will frequently encounter three important parameters.
+A. C (Regularization Parameter)
+C controls the trade-off between maximizing the margin and minimizing classification errors.
+
+Think of C as how strictly the model tries to classify training data correctly.
+- High C: Penalizes misclassification heavily. Tries to classify training examples correctly, potentially resulting in overfitting.
+- Low C: Allows more training errors and generally encourages a wider margin, potentially resulting in underfitting.
+
+
+
+
+
+
+
+
+medium.com
+
+
+B. Gamma
+Gamma is particularly important when using the RBF kernel.
+
+It controls how far the influence of an individual training point extends.
+- High Gamma: Each point has a smaller area of influence. The decision boundary can become more complex.
+- Low Gamma: Each point has a larger area of influence. The decision boundary becomes smoother.
+
+
+
+
+
+
+
+
+winder.ai
+
+
+C. Degree
+Degree is used with the polynomial kernel.
+
+It determines the polynomial degree.
+
+For example:
+- Degree = 2 → Quadratic relationships.
+- Degree = 3 → Cubic relationships.
+- Degree = 4 → Fourth-degree relationships.
+Higher degrees can create more complex decision boundaries.
+8. Types of SVM
+SVM can solve both classification and regression problems.
+
+
+
+
+
+
+
+
+
+
+1. Support Vector Classification (SVC)
+
+Used for classification problems.
+
+Examples:
+- Spam / Not Spam
+- Fraud / Not Fraud
+- Pass / Fail
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Support Vector Regression (SVR)
+
+Used for regression problems.
+
+Examples:
+- House price prediction
+- Stock price estimation
+- Temperature prediction
+
+
+
+What is SVR?
+Let's say you want to predict house prices.
+
+Traditional regression algorithms try to minimize prediction errors, commonly squared errors in Linear Regression.
+
+SVR takes a different approach.
+
+It tries to fit a function while allowing predictions to have an acceptable error margin called Epsilon (ε).
+
+
+
+
+
+
+
+
+leejiyoon52.github.io
+
+
+Imagine a tube around the prediction line:
+- Points inside the tube are considered within the acceptable error margin.
+- Points outside the tube contribute to the loss.
+- The algorithm tries to balance the tube's width, model complexity and prediction errors.
+This is the basic idea behind Support Vector Regression.
+9. Why is Feature Scaling important in SVM?
+Just like KNN, SVM is sensitive to feature scales.
+
+Suppose your dataset has:
+Feature	Value
+Age	30
+Salary	100,000
+
+--------------------------------------------------------------------------------------------------------------
+
 
 
 
