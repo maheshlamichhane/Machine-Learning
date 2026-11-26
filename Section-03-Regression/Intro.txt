@@ -247,8 +247,203 @@ Support Vector Regression
 Decision Tree Intuition
 -> It is not suitable for the single feature dataset
 -> it is suitable for non-linear dataset.
+-------------------------------------------------------------------------------------------------
+
+Random Forest Regression
+-> Random Forest Regression is a machine learning algorithm that combines multiple Decision Trees to make
+one final prediction.
+-> Instead of trusting a single decision tree, it creates many decision trees and takes the average of their
+predictions.
+-> Think of it like asking 100 people to estimate the price of a house and then taking the average of their
+answers.
 
 
+-------------------------------------------------------------------------------------------------------------
+Evaluating Machine Learning Model
+
+R-Squared (R²)
+R-Squared is a metric used to evaluate how well a regression model explains the variation in the actual data.
+
+In simple words:
+
+It tells us how well our machine learning model's predictions fit the actual values.
+
+For example, suppose you build a machine learning model to predict house prices.
+Actual price	Predicted price
+50 lakh	52 lakh
+60 lakh	58 lakh
+70 lakh	72 lakh
+80 lakh	79 lakh
+
+If predicted prices are close to actual prices, your model performs well and generally gets a higher R² score.
+1. Understanding R² values
+R² = 1.0
+Perfect fit
+
+
+
+Model predictions perfectly match actual values.
+
+
+R² = 0.85
+Good fit
+
+
+
+Model explains 85% of the variation in the target values.
+
+
+R² = 0.50
+Moderate fit
+
+
+
+Model explains 50% of the variation.
+
+
+R² = 0.0
+Poor fit
+
+
+
+No improvement over predicting the average target value.
+
+
+Important: R² can also be negative. This means your model performs worse than simply predicting the average actual value.
+2. How is R² calculated?
+The formula is:
+\[
+R^2 = 1-\frac{SS_{res}}{SS_{tot}}
+\]
+
+Where:
+- \(SS_{res}\) = Sum of Squared Residuals (prediction errors).
+- \(SS_{tot}\) = Total Sum of Squares (variation in actual values around their mean).
+In simple terms:
+- Smaller prediction errors → Higher R².
+- Larger prediction errors → Lower R².
+
+
+
+
+
+
+
+
+
+
+
+
+1. Problem with Traditional R-Squared (R²)
+First, let's understand a problem with the traditional R² method.
+
+Suppose you are building a machine learning model to predict house prices.
+
+You use these independent variables:
+- X1 = House size
+- X2 = Number of bedrooms
+- X3 = Location
+- X4 = House age
+Your model produces an R² score of 0.85.
+
+Now, suppose you add another independent variable:
+
+- X5 = House color
+
+House color probably has very little relationship with house prices.
+
+What happens to R² when you add another independent variable?
+
+Here is the problem:
+
+Traditional R² never decreases when you add more independent variables to a regression model, even if those variables are irrelevant.
+Example: Adding more features
+Model	Features	R² score
+Model 1	2	0.75
+Model 2	3	0.82
+Model 3	4	0.89
+Model 4	5	0.91
+
+Illustrative example. The R² score increases as features are added, even if some features contribute very little.
+
+So, you might think Model 4 is the best model because it has the highest R².
+
+But that's not necessarily true!
+
+You might be adding unnecessary independent variables that make the model more complex without providing meaningful predictive value.
+
+This is one reason why we use Adjusted R-Squared.
+
+
+
+
+
+
+
+
+
+
+2. What is Adjusted R-Squared?
+Adjusted R-Squared is an improved version of traditional R-Squared that considers the number of independent variables used in the model.
+
+It solves the problem of blindly rewarding a model for adding more features.
+
+It considers two things:
+1. How well the model explains the variation in the target variable.
+2. How many independent variables are used to achieve that result.
+Unlike traditional R², Adjusted R² can increase or decrease when you add a new independent variable.
+3. Adjusted R² formula
+\[
+R^2_{adj}=1-(1-R^2)\frac{n-1}{n-k-1}
+\]
+
+Where:
+- \(R^2\) = Traditional R-Squared.
+- \(n\) = Number of observations (rows).
+- \(k\) = Number of independent variables (features).
+Let's understand the difference:
+R²	Adjusted R²
+Never decreases when adding features.	Can increase or decrease.
+Does not penalize unnecessary features.	Penalizes unnecessary features.
+Considers model fit.	Considers model fit and model complexity.
+Useful for measuring explained variation.	Useful for comparing regression models with different numbers of features.
+
+4. Simple numerical example
+Suppose:
+- Number of observations (n) = 100
+- Number of independent variables (k) = 5
+- Traditional R² = 0.85
+Using the formula:
+\[
+R^2_{adj}=1-(1-0.85)\frac{100-1}{100-5-1}
+\]
+
+\[
+=1-(0.15)\times\frac{99}{94}
+\]
+
+\[
+=1-0.15798
+\]
+
+\[
+\boxed{R^2_{adj}=0.842}
+\]
+
+Final results
+0.850
+Traditional R²
+
+0.842
+Adjusted R²
+
+
+Adjusted R² is slightly lower because it accounts for the number of features used.
+
+---------------------------------------------------------------------------------------------------------
+Regression Model Selection In Python?
+from sklearn.metrics import r2_score
+r2_score(y_test,y_pred)
 
 
 
