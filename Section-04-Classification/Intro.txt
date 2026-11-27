@@ -2612,6 +2612,169 @@ Therefore, the prediction is:
 \boxed{Approved}
 \]
 
+------------------------------------------------------------------------------------------------------------
+
+Random Forest Classification
+Random Forest Classification Algorithm
+Random Forest Classification is a supervised machine learning algorithm used to classify data into different
+categories.
+
+It is an ensemble learning algorithm because it combines multiple Decision Trees to make one final prediction.
+
+Let's understand it step by step with a practical example.
+1. What is Random Forest Classification?
+Remember our previous topic, Decision Tree Classification?
+
+A Decision Tree makes a prediction using a sequence of questions.
+
+For example, suppose a bank wants to decide whether to approve or reject a loan.
+
+A decision tree might ask:
+- Is the credit score greater than 700?
+- Is the salary greater than 50,000?
+- Does the customer have a good repayment history?
+Based on the answers, it predicts whether to approve the loan.
+
+However, a single Decision Tree can make mistakes or overfit the training data.
+
+Random Forest solves this problem by creating multiple Decision Trees and combining their predictions.
+
+Imagine asking 100 different experts to make a decision. Each expert gives an opinion, and the
+majority opinion becomes the final decision.
+
+
+
+2. How does Random Forest work?
+Let's assume we have a dataset containing information about customers.
+Customer	Age	Salary	Loan Status
+A	25	30,000	Rejected
+B	35	60,000	Approved
+C	45	80,000	Approved
+D	22	25,000	Rejected
+E	40	70,000	Approved
+F	28	35,000	Rejected
+
+We want to predict whether a new customer should receive a loan.
+
+Random Forest works through the following steps.
+
+Step 1: Create random samples (Bootstrap Sampling)
+
+Random Forest creates multiple training datasets from the original dataset.
+
+It randomly selects records, allowing the same record to be selected more than once.
+
+For example:
+Original dataset
+A
+
+B
+
+C
+
+D
+
+E
+
+F
+
+
+
+Random samples for three trees
+Tree 1
+A, B, B, D, E, F
+
+Tree 2
+A, C, C, D, E, F
+
+Tree 3
+B, C, D, D, E, A
+
+
+This technique is called Bootstrap Sampling.
+
+Important: Sampling is done with replacement. That means after selecting a record, it can be selected again.
+
+
+Step 2: Build multiple Decision Trees
+
+Each sample is used to train a separate Decision Tree.
+Training dataset
+
+Tree 1
+Approved
+
+
+Tree 2
+Rejected
+
+
+Tree 3
+Approved
+
+
+
+Majority Voting
+Approved
+2 out of 3 trees predicted Approved
+
+
+Each tree learns its own decision rules from its sample.
+
+Step 3: Random Feature Selection
+
+This is another important concept.
+
+Suppose our dataset contains these features:
+- Age
+- Salary
+- Credit Score
+- Employment Years
+- Existing Debt
+In a normal Decision Tree, the algorithm considers all available features when selecting the best split.
+
+But Random Forest introduces randomness by considering only a randomly selected subset of features at each split.
+
+For example:
+Tree	Features considered at a split
+Tree 1	Age, Salary
+Tree 2	Credit Score, Debt
+Tree 3	Employment Years, Age
+Tree 4	Salary, Credit Score
+
+This makes the trees less correlated with each other.
+
+Why is this important?
+
+If every tree uses exactly the same features and follows very similar splits, they may make similar mistakes.
+
+Random feature selection encourages diversity among trees.
+
+Step 4: Final Prediction (Majority Voting)
+
+Suppose we have five Decision Trees.
+
+A new customer's details are:
+- Age = 35
+- Salary = 60,000
+- Credit Score = 750
+The trees make the following predictions:
+Decision Tree	Prediction
+Tree 1	Approved
+Tree 2	Approved
+Tree 3	Rejected
+Tree 4	Approved
+Tree 5	Rejected
+
+Count the votes:
+- Approved = 3
+- Rejected = 2
+Therefore:
+Final prediction: Approved
+The class with the most votes becomes the final prediction.
+
+
+
 
 
 
