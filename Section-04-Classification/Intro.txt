@@ -357,7 +357,8 @@ Let's understand it with a simple example.
 Suppose you have information about two types of fruits:
 - Apples (Red points)
 - Oranges (Blue points)
-You want to build a machine learning model that can identify whether a newly introduced fruit is an Apple or an
+You want to build a machine learning model that can identify whether a newly introduced fruit is an Apple or
+ an
 Orange.
 
 You have two features:
@@ -550,7 +551,8 @@ askfilo.com
 
 Example: Classifying emails into spam and not spam when the features are approximately linearly separable.
 B. Polynomial Kernel
-Used when the relationship between data points is more complex and can be represented using polynomial interactions.
+Used when the relationship between data points is more complex and can be represented using polynomial
+interactions.
 \[
 K(x,y)=(\gamma x^Ty+r)^d
 \]
@@ -729,6 +731,146 @@ Suppose your dataset has:
 Feature	Value
 Age	30
 Salary	100,000
+
+--------------------------------------------------------------------------------------------------------------
+
+Kernel SVM
+Absolutely! In Kernel SVM, the process of classifying a new point is almost the same, but there is one important
+ difference: the decision boundary can be non-linear (curved) instead of a straight line.
+
+Let's understand step by step.
+1. Why do we need Kernel SVM?
+Imagine we have two classes:
+- 🟡 Yellow points
+- 🔵 Blue points
+Suppose the blue points are surrounded by yellow points.
+
+
+
+
+
+
+
+
+linkedin.com
+
+
+A straight line cannot separate these two classes properly.
+
+This is where Kernel SVM helps.
+2. How does Kernel SVM work?
+Kernel SVM uses a mathematical technique called the Kernel Trick.
+
+It allows SVM to handle data that cannot be separated by a straight line in its original feature space.
+
+For example:
+1. It uses a kernel function to calculate relationships between data points.
+2. This allows it to learn a non-linear decision boundary.
+3. It classifies a new point based on which side of that boundary it falls.
+
+
+
+
+
+
+
+
+medium.com
+
+
+You don't need to manually transform the data into higher dimensions. The kernel function handles the required
+calculations.
+3. How is a new point classified?
+For a new point \(X\), Kernel SVM uses a decision function:
+\[
+f(X)=\sum_{i=1}^{n}\alpha_i y_i K(X_i,X)+b
+\]
+
+Where:
+- \(X_i\) = Training data points (support vectors contribute to the sum).
+- \(\alpha_i\) = Learned weights.
+- \(y_i\) = Class labels (-1 or +1).
+- \(K(X_i,X)\) = Kernel function.
+- \(b\) = Bias.
+The decision is:
+Decision function	Predicted class
+Positive	Class +1
+Negative	Class -1
+Zero	On the decision boundary
+
+So even though the boundary is curved, the classification principle remains the same.
+4. Different types of kernels
+Kernel	What it does
+Linear	Straight decision boundary
+Polynomial	Can create curved boundaries
+RBF (Gaussian)	Can create flexible, complex boundaries
+Sigmoid	Uses a sigmoid-based kernel function
+
+The RBF kernel is a common starting point for non-linear classification.
+
+------------------------------------------------------------------------------------------------------
+
+Kernel SVM
+What is Kernel SVM (Support Vector Machine)?
+First, remember what SVM does:
+
+SVM is a supervised machine learning algorithm used mainly for classification.
+
+Its goal is to find the best decision boundary (hyperplane) that separates different classes of data.
+
+But there is a problem: What if the data cannot be separated using a straight line?
+
+This is where Kernel SVM comes in.
+1. Understand the problem with normal SVM
+Imagine we have two classes of data:
+- Yellow points in the center.
+- Purple points surrounding the yellow points.
+
+Can you separate these two classes using a straight line?
+
+No! Because the yellow points are surrounded by purple points.
+
+A normal linear SVM cannot effectively separate them using a straight decision boundary.
+2. How does Kernel SVM solve this problem?
+Kernel SVM uses something called the Kernel Trick.
+
+The basic idea is:
+1. Take the original data (2D).
+2. Transform it mathematically into a higher-dimensional space (3D, for example).
+3. Find a linear decision boundary in that higher-dimensional space.
+4. When viewed in the original space, that boundary becomes nonlinear.
+
+
+Think of it this way:
+
+In 2D, you cannot separate the points using a straight line.
+
+But after transforming the data into 3D, you might be able to separate them using a flat plane.
+
+When that plane is mapped back to 2D, it creates a curved decision boundary.
+
+That's the main concept of Kernel SVM!
+3. What is the Kernel Trick?
+The Kernel Trick allows SVM to calculate relationships between data points in a higher-dimensional feature space without explicitly transforming all the data into that space.
+
+In simple words:
+
+Instead of actually converting every data point into 3D or 4D, the kernel function performs the necessary mathematical calculations efficiently.
+
+There are four popular kernel functions:
+Kernel	Explanation
+Linear	Separates data using a straight line or plane.
+Polynomial	Creates curved decision boundaries.
+RBF (Gaussian)	Handles complex, nonlinear patterns.
+Sigmoid	Uses a sigmoid-shaped mathematical function.
+
+Note:
+K(x,l1) + K(x,l2) (simplified formula)
+Green when:
+K(x,l1) + K(x,l2) > 0
+Red when:
+K(x,l1)+K(x,l2) = 0
+here both x and l are vectors.
 
 --------------------------------------------------------------------------------------------------------------
 
