@@ -2113,19 +2113,505 @@ Prediction speed	Fast	Fast	Can be slow	Usually fast after training
 Nonlinear patterns	Depends on variant and features	Requires feature engineering	Can handle	With kernels
 Common use	Text classification	Binary classification	Pattern classification	Classification
 
-
-
-
-
-
-
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------
+
+
+Decision Tree Classification
+
+1. What is Decision Tree Classification?
+Decision Tree Classification is a supervised machine learning algorithm used to solve classification problems.
+
+It predicts the class or category of a new data point by following a sequence of decisions based on its input features.
+
+In simple words:
+
+A Decision Tree works like a flowchart. It asks a series of questions and makes decisions based on the answers until it reaches a final prediction.
+
+For example, suppose a bank wants to predict whether a customer will get a loan approved or rejected.
+
+It may consider:
+- Monthly salary.
+- Credit score.
+- Existing loans.
+- Employment status.
+- Previous repayment history.
+The decision tree might ask:
+1. Is the customer's credit score greater than 700?
+2. If yes, is their salary greater than NPR 50,000?
+3. Based on the answers, should the loan be approved or rejected?
+This is how a Decision Tree makes predictions.
+
+Common applications:
+1. Loan approval prediction.
+2. Fraud detection.
+3. Customer churn prediction.
+4. Medical diagnosis.
+5. Spam detection.
+6. Employee attrition prediction.
+7. Customer segmentation.
+2. How does a Decision Tree work?
+A Decision Tree consists of three important components.
+Component	Meaning
+Root Node	The first node where the decision-making process starts.
+Decision/Internal Node	A node where a condition or question is evaluated.
+Leaf Node	The final node containing the predicted class.
+
+Let's take a simple loan approval example.
+Example: Loan approval decision tree
+Credit Score above 700?
+
+Root Node
+
+Yes ↓
+
+No ↓
+
+Salary above NPR 50,000?
+
+Decision node
+
+Yes
+
+No
+
+Approved
+
+
+Rejected
+
+
+
+
+Rejected
+
+Leaf node
+
+
+
+
+Illustrative decision rules, not actual banking approval criteria.
+Let's understand:
+- Root node: Is the credit score above 700?
+- If No: Loan rejected.
+- If Yes: Check whether the salary is above NPR 50,000.
+- If Yes: Loan approved.
+- If No: Loan rejected.
+The algorithm follows these conditions until it reaches a leaf node.
+3. How does the algorithm decide which question to ask first?
+This is the most important concept in Decision Tree Classification.
+
+Suppose we have 10 customers:
+Customer	Credit Score	Salary	Loan Status
+1	750	60,000	Approved
+2	720	55,000	Approved
+3	680	30,000	Rejected
+4	650	25,000	Rejected
+5	780	80,000	Approved
+6	620	35,000	Rejected
+7	710	65,000	Approved
+8	690	45,000	Rejected
+9	740	70,000	Approved
+10	630	28,000	Rejected
+
+We have two input features:
+- Credit Score.
+- Salary.
+Our target variable:
+
+- Loan Status (Approved or Rejected).
+
+The algorithm needs to decide:
+
+Should it split the data based on Credit Score or Salary first?
+
+It evaluates different possible splits and chooses the one that produces the best separation of classes.
+
+To understand how it makes that decision, we need to understand two important concepts:
+1. Entropy.
+2. Information Gain.
+
+4. What is Entropy?
+Entropy measures the impurity or randomness of a dataset.
+
+In simple words:
+
+Entropy tells us how mixed the classes are in a dataset.
+
+For example, suppose we have 10 customers.
+
+Scenario A:
+- 5 customers have Approved loans.
+- 5 customers have Rejected loans.
+Both classes are equally distributed. The dataset is highly mixed.
+
+Entropy is high.
+
+Scenario B:
+- 10 customers have Approved loans.
+- 0 customers have Rejected loans.
+All customers belong to the same class. The dataset is completely pure.
+
+Entropy is zero.
+Entropy formula
+\[
+Entropy(S)=-\sum_{i=1}^{n}p_i\log_2(p_i)
+\]
+
+For binary classification:
+\[
+\boxed{
+H(S)=-p_1\log_2(p_1)-p_2\log_2(p_2)
+}
+\]
+
+Where:
+- \(p_1\) = Probability of the first class.
+- \(p_2\) = Probability of the second class.
+- \(H(S)\) = Entropy of the dataset.
+Example 1: Calculate entropy when both classes are equal
+Suppose we have 10 customers:
+- Approved = 5.
+- Rejected = 5.
+Probability of Approved:
+\[
+P(Approved)=\frac{5}{10}=0.5
+\]
+
+Probability of Rejected:
+\[
+P(Rejected)=\frac{5}{10}=0.5
+\]
+
+Apply the formula:
+\[
+H(S)=-0.5\log_2(0.5)
+\]
+
+\[
+-0.5\log_2(0.5)=0.5
+\]
+
+For both classes:
+\[
+H(S)=-(0.5\times-1)-(0.5\times-1)
+\]
+
+\[
+\boxed{H(S)=1}
+\]
+
+Maximum impurity
+Example 2: Calculate entropy when all customers belong to one class
+Suppose:
+- Approved = 10.
+- Rejected = 0.
+\[
+P(Approved)=\frac{10}{10}=1
+\]
+
+\[
+P(Rejected)=\frac{0}{10}=0
+\]
+
+Apply the formula:
+\[
+H(S)=-(1\times\log_2(1))
+\]
+
+\[
+-(0\times\log_2(0))
+\]
+
+We define the zero-probability contribution as zero.
+
+Therefore:
+\[
+\boxed{H(S)=0}
+\]
+
+Completely pure dataset
+Entropy values to remember
+Distribution	Entropy	Meaning
+10 Approved, 0 Rejected	0	Completely pure
+9 Approved, 1 Rejected	0.469	Very low impurity
+8 Approved, 2 Rejected	0.722	Low impurity
+7 Approved, 3 Rejected	0.881	Moderate impurity
+5 Approved, 5 Rejected	1	Maximum impurity
+
+For binary classification, entropy ranges from 0 to 1.
+
+Remember:
+- Entropy = 0 means all observations belong to one class.
+- Entropy = 1 means both classes are equally distributed.
+- Lower entropy means a purer dataset.
+
+5. What is Information Gain?
+Now we understand entropy.
+
+But how does a Decision Tree select the best feature for splitting?
+
+This is where Information Gain comes in.
+
+Information Gain measures how much uncertainty is reduced after splitting a dataset using a particular feature.
+
+In simple words:
+
+It tells us how useful a feature is for separating different classes.
+Information Gain formula
+\[
+\boxed{
+IG=H(Parent)-H(Children)
+}
+\]
+
+More precisely, because the child nodes can have different sizes:
+\[
+IG=H(S)-\sum_{j=1}^{k}
+\frac{|S_j|}{|S|}H(S_j)
+\]
+
+Where:
+- \(H(S)\) = Entropy before splitting.
+- \(H(S_j)\) = Entropy of each child node.
+- \(|S_j|\) = Number of observations in each child.
+- \(|S|\) = Total number of observations.
+The weighted child entropy is important because each child may contain a different number of observations.
+Example: Information Gain using our loan dataset
+Recall our dataset:
+Customer	Credit Score	Salary	Loan Status
+1	750	60,000	Approved
+2	720	55,000	Approved
+3	680	30,000	Rejected
+4	650	25,000	Rejected
+5	780	80,000	Approved
+6	620	35,000	Rejected
+7	710	65,000	Approved
+8	690	45,000	Rejected
+9	740	70,000	Approved
+10	630	28,000	Rejected
+
+We have:
+- 5 Approved.
+- 5 Rejected.
+The parent entropy is:
+\[
+H(S)=1
+\]
+
+Now let's consider a possible split:
+
+Credit Score greater than 700?
+
+This creates two groups.
+
+Group 1: Credit Score greater than 700.
+Customer	Credit Score	Loan Status
+1	750	Approved
+2	720	Approved
+5	780	Approved
+7	710	Approved
+9	740	Approved
+
+This group contains:
+- Approved = 5.
+- Rejected = 0.
+Its entropy is:
+\[
+H(S_1)=0
+\]
+
+Group 2: Credit Score less than or equal to 700.
+Customer	Credit Score	Loan Status
+3	680	Rejected
+4	650	Rejected
+6	620	Rejected
+8	690	Rejected
+10	630	Rejected
+
+This group contains:
+- Approved = 0.
+- Rejected = 5.
+Its entropy is:
+\[
+H(S_2)=0
+\]
+
+Now calculate weighted child entropy:
+\[
+H(Children)=
+\frac{5}{10}\times0+
+\frac{5}{10}\times0
+\]
+
+\[
+\boxed{H(Children)=0}
+\]
+
+Calculate Information Gain:
+\[
+IG=H(Parent)-H(Children)
+\]
+
+\[
+IG=1-0
+\]
+
+\[
+\boxed{IG=1}
+\]
+
+Perfect Information Gain
+This means the Credit Score split completely separates our two classes.
+What about Salary?
+Let's try another split:
+
+Salary greater than NPR 50,000?
+
+Group 1: Salary greater than NPR 50,000.
+
+All five customers have Approved loans.
+\[
+H(S_1)=0
+\]
+
+Group 2: Salary less than or equal to NPR 50,000.
+
+All five customers have Rejected loans.
+\[
+H(S_2)=0
+\]
+
+Therefore:
+\[
+IG(Salary)=1-0=1
+\]
+
+Both features produce the same Information Gain in this particular dataset.
+
+The algorithm can select either one as the root feature.
+
+Important: In a real dataset, the algorithm evaluates many possible splitting thresholds and selects the split that produces the highest Information Gain.
+
+6. What is Gini Impurity?
+Entropy is not the only method used by Decision Trees.
+
+Another popular method is called Gini Impurity.
+
+Gini Impurity measures how likely a randomly selected observation would be incorrectly classified if it were labelled according to the class distribution of the node.
+
+In simple words:
+
+It measures how mixed the classes are in a dataset.
+Gini Impurity formula
+\[
+\boxed{Gini=1-\sum_{i=1}^{n}p_i^2}
+\]
+
+For binary classification:
+\[
+Gini=1-[P(Approved)^2+P(Rejected)^2]
+\]
+
+Example 1: Equal distribution
+Suppose:
+- Approved = 5.
+- Rejected = 5.
+\[
+P(Approved)=0.5
+\]
+
+\[
+P(Rejected)=0.5
+\]
+
+Apply the formula:
+\[
+Gini=1-(0.5^2+0.5^2)
+\]
+
+\[
+=1-(0.25+0.25)
+\]
+
+\[
+\boxed{Gini=0.5}
+\]
+
+Example 2: Completely pure dataset
+Suppose:
+- Approved = 10.
+- Rejected = 0.
+\[
+Gini=1-(1^2+0^2)
+\]
+
+\[
+\boxed{Gini=0}
+\]
+
+Entropy vs Gini Impurity
+Feature	Entropy	Gini Impurity
+Measures	Uncertainty	Impurity
+Formula	\(-\sum p_i\log_2 p_i\)	\(1-\sum p_i^2\)
+Pure node	0	0
+Maximum for binary classification	1	0.5
+Computation	Relatively more expensive	Relatively simpler
+
+Both methods help a Decision Tree find good splits.
+
+In Scikit-learn, the default splitting criterion for DecisionTreeClassifier is gini.
+
+7. How does a Decision Tree build the complete tree?
+Now let's connect everything.
+
+A Decision Tree generally follows these steps:
+1. Start with the complete dataset.
+
+   Calculate the impurity of the parent node.
+2. Evaluate available features and possible splits.
+
+   For example, Credit Score greater than 700 or Salary greater than 50,000.
+3. Calculate the impurity after each split.
+
+   Calculate weighted entropy or weighted Gini impurity.
+4. Select the best split.
+
+   Choose the split with the highest Information Gain or lowest weighted impurity.
+5. Repeat the process recursively.
+
+   Continue splitting the resulting child nodes.
+6. Stop when a stopping condition is reached.
+
+   For example, the node becomes pure, the maximum depth is reached, or further splitting is not allowed.
+Important: Decision Trees use recursion
+The algorithm repeats the same process on each child node.
+
+It doesn't simply select one feature and stop.
+
+It continues until it reaches a leaf node or a configured stopping condition.
+
+8. How does the Decision Tree classify a new data point?
+Let's assume our trained decision tree has these rules:
+1. Credit Score greater than 700?
+2. If Yes, classify as Approved.
+3. Otherwise, classify as Rejected.
+Now suppose a new customer arrives:
+- Credit Score = 720.
+- Salary = NPR 60,000.
+The algorithm checks:
+
+First condition:
+\[
+720>700
+\]
+
+This is True.
+
+Therefore, the prediction is:
+\[
+\boxed{Approved}
+\]
+
 
 
 
