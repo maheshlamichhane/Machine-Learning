@@ -380,8 +380,188 @@ Initial centroids may be close together	Encourages centroids to be spread out
 Can produce poor initial clusters	Usually produces better initialization
 May converge to a poor local solution	Often improves the quality of the final solution
 
-Important: K-Means++ does not guarantee the globally optimal clustering result. It improves the initialization process.
+Important: K-Means++ does not guarantee the globally optimal clustering result. It improves the initialization
+process.
 
 ----------------------------------------------------------------------------------------------------------------
+
+Hierarchical Clustering
+Hierarchical Clustering is an unsupervised machine learning algorithm that groups similar data points into
+clusters by creating a hierarchy (tree-like structure) of clusters.
+
+Unlike K-Means, where we must specify the number of clusters (K) before training, Hierarchical Clustering
+allows us to explore different numbers of clusters using a structure called a Dendrogram.
+
+Let's understand it step by step.
+1. Simple real-world example
+Imagine you own a shopping mall and have 6 customers.
+
+You have collected two features:
+- Annual income.
+- Spending score.
+Your objective is to group customers based on their similarities.
+
+Suppose your customers are:
+Customer	Annual Income	Spending Score
+A	20	80
+B	22	82
+C	25	85
+D	80	20
+E	82	22
+F	85	25
+
+Now, we want to identify groups of customers with similar characteristics.
+
+Hierarchical Clustering does this by gradually grouping similar data points together.
+2. Types of Hierarchical Clustering
+There are two major types:
+
+1. Agglomerative Hierarchical Clustering (Bottom-Up)
+
+This is the most commonly used approach.
+
+It starts with every data point as an individual cluster and gradually merges similar clusters together.
+
+For example:
+
+Initially:
+- A is one cluster.
+- B is one cluster.
+- C is one cluster.
+- D is one cluster.
+- E is one cluster.
+- F is one cluster.
+Then the algorithm starts merging the closest points.
+
+For example:
+1. A and B are merged into one cluster.
+2. D and E are merged into another cluster.
+3. C joins the cluster containing A and B.
+4. F joins the cluster containing D and E.
+5. Finally, both large clusters are merged.
+Eventually, all data points become one cluster.
+
+2. Divisive Hierarchical Clustering (Top-Down)
+
+This works in the opposite direction.
+
+It starts with all data points in one large cluster and gradually divides them into smaller clusters.
+
+For example:
+1. Initially, all 6 customers belong to one cluster.
+2. The algorithm divides them into two groups.
+3. Each group is divided further.
+4. Eventually, every customer becomes an individual cluster.
+Remember:
+Agglomerative	Divisive
+Bottom-up approach	Top-down approach
+Starts with individual clusters	Starts with one large cluster
+Merges clusters	Splits clusters
+More commonly used	Less commonly used
+
+3. What is a Dendrogram?
+This is the most important concept in Hierarchical Clustering.
+
+A Dendrogram is a tree-like diagram that represents how individual data points or clusters are merged or divided
+ at different distance levels.
+
+In simple words, it shows:
+- Which data points are grouped together.
+- When two clusters are merged.
+- How similar or different the clusters are.
+- At what distance clusters are combined.
+Let's understand using our customer example.
+
+Suppose we have 6 customers: A, B, C, D, E, F.
+
+The algorithm starts by calculating distances between customers.
+
+Assume:
+- A and B have the smallest distance.
+- D and E have the second-smallest distance.
+Therefore, it first merges A and B, then D and E.
+
+Next, it calculates distances between the newly formed clusters and the remaining customers or clusters.
+
+This process continues until all customers belong to one cluster.
+
+The Dendrogram records every merging operation.
+4. How do we determine the number of clusters using a Dendrogram?
+This is where the Dendrogram becomes useful.
+
+Unlike K-Means, we don't need to decide the number of clusters before performing hierarchical clustering.
+
+We can use the Dendrogram to determine a suitable number of clusters.
+
+The process is simple:
+
+Step 1: Generate the Dendrogram.
+
+Step 2: Identify the largest vertical distance between cluster-merging levels where no other merging occurs.
+
+Step 3: Draw a horizontal line through that region.
+
+Step 4: Count how many vertical branches the horizontal line intersects.
+
+That number represents the resulting clusters.
+
+For example:
+
+Suppose your horizontal line intersects 3 vertical branches.
+
+Then:
+\[
+K=3
+\]
+
+You can create 3 clusters from your dataset.
+
+Important: The horizontal line should be placed in a large gap between merging heights, not at an arbitrary position.
+5. What is Linkage in Hierarchical Clustering?
+Another important concept is Linkage.
+
+When we have two clusters, how do we calculate the distance between them?
+
+For example:
+- Cluster A contains customers 1, 2, and 3.
+- Cluster B contains customers 4, 5, and 6.
+How do we calculate the distance between these two clusters?
+
+Linkage defines how the distance between clusters is calculated.
+
+There are several linkage methods.
+
+1. Single Linkage
+
+Calculates the minimum distance between any two points belonging to different clusters.
+
+In simple words: It considers the closest points between two clusters.
+
+2. Complete Linkage
+
+Calculates the maximum distance between any two points belonging to different clusters.
+
+In simple words: It considers the farthest points between two clusters.
+
+3. Average Linkage
+
+Calculates the average distance between all pairs of points from two different clusters.
+
+4. Ward Linkage
+
+Merges clusters that result in the smallest increase in within-cluster variance (sum of squared deviations from cluster means).
+
+It generally tries to create compact and relatively balanced clusters.
+Linkage	How distance is calculated
+Single	Minimum distance
+Complete	Maximum distance
+Average	Average distance
+Ward	Minimum increase in within-cluster variance
+
+6. Python implementation using Scikit-learn
+Let's understand how to implement Hierarchical Clustering.
+
+First, we generate a Dendrogram using SciPy.
+---------------------------------------------------------------------------------------------------------------
 
 
